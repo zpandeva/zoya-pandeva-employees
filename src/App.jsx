@@ -56,7 +56,7 @@ export default function App() {
         }
       }
     });
-    
+
     const rows = Array.from(pairs.values());
     const projectsDaysWorked = new Map();
     rows.forEach((row) => {
@@ -72,14 +72,14 @@ export default function App() {
         projectToMax.set(projectId, Math.max(...projectDaysWorked));
       }
     });
-    
+
     const longestPeriod = [];
     rows.forEach((r) => {
       if (projectToMax.get(r.projectId) === r.daysWorked) {
         longestPeriod.push(r);
       }
     });
-    setRows(rows);
+    setRows(longestPeriod);
   };
 
   const columns = [
@@ -90,16 +90,15 @@ export default function App() {
   ];
 
   return (
-    <div>
-      <h3>
-        Pair of employees who have worked together for the longest period of
-        time.{" "}
-      </h3>
+    <div style={{ marginLeft: "50px" , paddingTop:0}}>
+      <h2>
+      Employee Pair Viewer
+      </h2>
       <input
         type="file"
         accept=".csv"
         onChange={handleFileUpload}
-        className="mb-4"
+        style={{ margin: "20px" }}
       />
       <div style={{ height: 500, width: "100%" }}>
         <DataGrid rows={rows} columns={columns} pageSize={10} />
